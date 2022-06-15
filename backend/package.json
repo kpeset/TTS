@@ -14,6 +14,7 @@
     "dotenv": "^10.0.0",
     "express": "^4.18.1",
     "joi": "^17.6.0",
+    "jsonwebtoken": "^8.5.1",
     "mon-template": "file:..",
     "mongoose": "^6.3.8"
   },

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "setup": "npm i && npm --prefix ./frontend i && npm --prefix ./backend i",
-    "dev": "concurrently \"npm --prefix ./frontend start\" \"npm --prefix ./backend run back\"",
+    "dev": "concurrently \"npm --prefix ./frontend start\" \"npm --prefix ./backend start\"",
     "backend": "npm --prefix ./backend start",
     "frontend": "npm --prefix ./frontend start"
   },

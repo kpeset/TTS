@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const User = require("../model/User");
 const { registerValidation, loginValidation } = require("../validation");
+const jwt = require('jsonwebtoken')
 const argon2 = require("argon2");
 
 router.post("/register", async (req, res) => {
@@ -57,11 +58,13 @@ router.post("/login", async (req, res) => {
 // Si l'email n'existe pas, alors j'envoie ce message.
 // Volontairement, j'inclus une erreur de MDP pour ne pas dire à un potentiel pirate que l'email existe dans la DB.
     return res.status(400).send("Email ou password invalide");
-// SI  LE MDP EST CORRECT
+// Maintenant je vérifie le MDP avec la fonctionnalité verify de argon2
 const validPass = await argon2.verify(user.password, req.body.password);
 if(!validPass) return res.status(400).send('Email ou password invalide')
 
-res.send('Tu es connecté !')
+//Créer et assigner un token
+const token = jwt.sign({_id: user._id}, process.env.TOKEN_SECRET)
+res.header('auth-token', token).send(token);
 
 });
 
