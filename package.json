@@ -6,7 +6,7 @@
   "scripts": {
     "setup": "npm i && npm --prefix ./frontend i && npm --prefix ./backend i",
     "dev": "concurrently \"npm --prefix ./frontend start\" \"npm --prefix ./backend run back\"",
-    "backend": "npm --prefix ./backend run back",
+    "backend": "npm --prefix ./backend start",
     "frontend": "npm --prefix ./frontend start"
   },
   "keywords": [],
