@@ -57,10 +57,10 @@ router.post("/login", async (req, res) => {
   if (!user)
 // Si l'email n'existe pas, alors j'envoie ce message.
 // Volontairement, j'inclus une erreur de MDP pour ne pas dire à un potentiel pirate que l'email existe dans la DB.
-    return res.status(400).send("Email ou password invalide");
+    return res.status(400).send("Email invalide");
 // Maintenant je vérifie le MDP avec la fonctionnalité verify de argon2
 const validPass = await argon2.verify(user.password, req.body.password);
-if(!validPass) return res.status(400).send('Email ou password invalide')
+if(!validPass) return res.status(400).send('Password invalide')
 
 //Créer et assigner un token
 const token = jwt.sign({_id: user._id}, process.env.TOKEN_SECRET)
