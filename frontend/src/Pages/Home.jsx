@@ -50,10 +50,10 @@ useEffect(() => {
         password: loginValue.password,
       })
       .then(function (response) {
-        console.log(response);
+        window.location="/success"
       })
       .catch(function (error) {
-        console.log(error);
+        window.location = "/";
       });
   };
 
