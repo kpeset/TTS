@@ -1,6 +1,35 @@
+import React, { useState } from "react";
+import axios from "axios";
 import "../Styles/app.css";
 
 function Home() {
+  const [registerValue, setRegisterValue] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleSubmit = (e) => {
+   //Ici je sauvegarde les states de mon formulaire d'inscription
+   axios.post('http://localhost:4000/api/user/register/', {
+    email: registerValue.email,
+    password: registerValue.email
+   })
+   .then(function (response) {
+    console.log(response)
+   })
+   .catch(function(error) {
+    console.log(error)
+   })
+
+  };
+
+  const handleChange = (event) => {
+    setRegisterValue({
+      ...registerValue,
+      [event.target.name]: event.target.value,
+    }); console.log(`Email : ${registerValue.email} & MDP : ${registerValue.password}`);
+  };
+
   return (
     <div className="main-form">
       <div className="left-part">
@@ -15,24 +44,44 @@ function Home() {
           <input type="email" />
           <p>Mot de passe</p>
           <input type="password" />
-          <button type="button" className="login">Se connecter</button>
+          <button type="button" className="login">
+            Se connecter
+          </button>
         </div>
       </div>
 
       <div className="right-part">
-        <h1>Pas encore membre ?</h1>
-        <div className="subtitle">
-          <div className="line"></div>
-          <h2>S'inscrire</h2>
-          <div className="line"></div>
-        </div>
-        <div className="input-login">
-          <p>Email</p>
-          <input type="email" />
-          <p>Mot de passe</p>
-          <input type="password" />
-          <button type="button" className="signin">S'inscrire</button>
-        </div>
+        <form onSubmit={handleSubmit}>
+          <h1>Pas encore membre ?</h1>
+          <div className="subtitle">
+            <div className="line"></div>
+            <h2>S'inscrire</h2>
+            <div className="line"></div>
+          </div>
+          <div className="input-login">
+            <label>
+              <p>Email</p>
+              <input
+                type="email"
+                name="email"
+                value={registerValue.email}
+                onChange={handleChange}
+              />
+            </label>
+            <label>
+              <p>Mot de passe</p>
+              <input
+                type="password"
+                name="password"
+                value={registerValue.password}
+                onChange={handleChange}
+              />
+            </label>
+            <button type="submit" className="signin">
+              S'inscrire
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   );
