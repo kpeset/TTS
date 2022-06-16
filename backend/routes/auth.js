@@ -1,7 +1,9 @@
 const router = require("express").Router();
 const User = require("../model/User");
 const { registerValidation, loginValidation } = require("../validation");
-const jwt = require('jsonwebtoken')
+const jwt = require("jsonwebtoken");
+const cookieParser = require("cookie-parser");
+const verify = require("./verifyToken");
 const argon2 = require("argon2");
 
 router.post("/register", async (req, res) => {
@@ -31,11 +33,10 @@ router.post("/register", async (req, res) => {
 
   const hashedPassword = await argon2.hash(req.body.password, hashingOptions);
 
-
   // Si il n'y a pas d'erreur suite à la vérification via Joi alors il passe à l'étape suivante qui est de créer le user en question
   const user = new User({
     email: req.body.email,
-    password: hashedPassword
+    password: hashedPassword,
   });
   try {
     const savedUser = await user.save();
@@ -52,20 +53,22 @@ router.post("/login", async (req, res) => {
   const { error } = loginValidation(req.body);
   if (error) return res.status(400).send(`Erreur :` + error.details[0].message);
 
-// Je vérifie si l'émail existe
+  // Je vérifie si l'émail existe
   const user = await User.findOne({ email: req.body.email });
   if (!user)
-// Si l'email n'existe pas, alors j'envoie ce message.
-// Volontairement, j'inclus une erreur de MDP pour ne pas dire à un potentiel pirate que l'email existe dans la DB.
+    // Si l'email n'existe pas, alors j'envoie ce message.
+    // Volontairement, j'inclus une erreur de MDP pour ne pas dire à un potentiel pirate que l'email existe dans la DB.
     return res.status(400).send("Email invalide");
-// Maintenant je vérifie le MDP avec la fonctionnalité verify de argon2
-const validPass = await argon2.verify(user.password, req.body.password);
-if(!validPass) return res.status(400).send('Password invalide')
+  // Maintenant je vérifie le MDP avec la fonctionnalité verify de argon2
+  const validPass = await argon2.verify(user.password, req.body.password);
+  if (!validPass) return res.status(400).send("Password invalide");
 
-//Créer et assigner un token
-const token = jwt.sign({_id: user._id}, process.env.TOKEN_SECRET)
-res.header('auth-token', token).send(token);
-
+  //Créer et assigner un token
+  const token = jwt.sign({ id: user.id }, process.env.TOKEN_SECRET);
+  res
+    // .header("auth-token", token)
+    .cookie("authcookie", token, { maxAge: 900000, httpOnly: true })
+    .send(`Mon token : ${token}`);
 });
 
 module.exports = router;

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../Styles/app.css";
 
-
 function Home() {
   const [registerValue, setRegisterValue] = useState({
     email: "",
@@ -15,7 +14,7 @@ function Home() {
   });
 
   const handleSubmitRegister = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     //Ici je sauvegarde les states de mon formulaire d'inscription
     axios
       .post("http://localhost:4000/api/user/register/", {
@@ -37,19 +36,22 @@ function Home() {
     });
   };
 
-useEffect(() => {
-  console.log(registerValue);
-},[registerValue]);
+  useEffect(() => {
+    console.log(registerValue);
+  }, [registerValue]);
 
   const handleSubmitLogin = (e) => {
     //Ici je sauvegarde les states de mon formulaire d'inscription
-    e.preventDefault()
+    e.preventDefault();
     axios
       .post("http://localhost:4000/api/user/login/", {
         email: loginValue.email,
         password: loginValue.password,
+      },{
+        withCredentials: true
       })
       .then(function (response) {
+        console.log(response);
         window.location="/success"
       })
       .catch(function (error) {
