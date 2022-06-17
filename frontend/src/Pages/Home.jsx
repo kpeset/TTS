@@ -6,6 +6,7 @@ function Home() {
   const [registerValue, setRegisterValue] = useState({
     email: "",
     password: "",
+    checkPassword: "",
   });
 
   const [loginValue, setLoginValue] = useState({
@@ -14,19 +15,30 @@ function Home() {
   });
 
   const handleSubmitRegister = (e) => {
-    e.preventDefault();
     //Ici je sauvegarde les states de mon formulaire d'inscription
-    axios
-      .post("http://localhost:4000/api/user/register/", {
-        email: registerValue.email,
-        password: registerValue.password,
-      })
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    if (registerValue.password !== registerValue.checkPassword) {
+      alert("Les mots de passe ne sont pas identiques");
+    } else {
+      axios
+        .post("http://localhost:4000/api/user/register/", {
+          email: registerValue.email,
+          password: registerValue.password,
+        })
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          const mailAlreadyExist = error.response.data;
+          if (
+            mailAlreadyExist ===
+            "Votre email est déjà liée à un compte existant."
+          ) {
+            alert(mailAlreadyExist);
+          } else {
+            alert("Votre mot de passe doit contenir au moins 6 caractères.");
+          }
+        });
+    }
   };
 
   const handleChangeRegister = (event) => {
@@ -36,26 +48,33 @@ function Home() {
     });
   };
 
-  useEffect(() => {
-    console.log(registerValue);
-  }, [registerValue]);
-
   const handleSubmitLogin = (e) => {
     //Ici je sauvegarde les states de mon formulaire d'inscription
     e.preventDefault();
     axios
-      .post("http://localhost:4000/api/user/login/", {
-        email: loginValue.email,
-        password: loginValue.password,
-      },{
-        withCredentials: true
-      })
+      .post(
+        "http://localhost:4000/api/user/login/",
+        {
+          email: loginValue.email,
+          password: loginValue.password,
+        },
+        {
+          withCredentials: true,
+        }
+      )
       .then(function (response) {
         console.log(response);
-        window.location="/success"
+        window.location = "/success";
       })
       .catch(function (error) {
-        window.location = "/";
+        const mailNotExist = error.response.data;
+        if (mailNotExist === "Ce compte n'existe pas.") {
+          alert(mailNotExist);
+          window.location = "/";
+        } else {
+          alert("Email ou mot de passe incorrect.");
+          window.location = "/";
+        }
       });
   };
 
@@ -88,6 +107,7 @@ function Home() {
             <input
               type="password"
               name="password"
+              autoComplete="on"
               value={loginValue.password}
               onChange={handleChangeLogin}
             />
@@ -107,8 +127,8 @@ function Home() {
             <div className="line"></div>
           </div>
           <div className="input-login">
+            <p>Email</p>
             <label>
-              <p>Email</p>
               <input
                 type="email"
                 name="email"
@@ -116,15 +136,27 @@ function Home() {
                 onChange={handleChangeRegister}
               />
             </label>
+            <p>Mot de passe</p>
             <label>
-              <p>Mot de passe</p>
               <input
                 type="password"
                 name="password"
+                autoComplete="off"
                 value={registerValue.password}
                 onChange={handleChangeRegister}
               />
             </label>
+            <p>Veuillez saisir à nouveau votre mot de passe</p>
+            <label>
+              <input
+                type="password"
+                name="checkPassword"
+                autoComplete="off"
+                value={registerValue.checkPassword}
+                onChange={handleChangeRegister}
+              />
+            </label>
+
             <button type="submit" className="signin">
               S'inscrire
             </button>

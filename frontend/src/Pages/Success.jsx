@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import GetMail from "../Components/GetMail";
 
 function Success() {
   const [isLoading, setIsLoading] = useState(true);
@@ -9,20 +10,26 @@ function Success() {
       .get("http://localhost:4000/api/success", {
         withCredentials: true,
       })
-      .then(function (response) {
+      .then(function () {
         setIsLoading(!isLoading);
-        console.log(isLoading);
       })
       .catch(function (error) {
         window.location = "/";
       });
   }, []);
 
+
+
+  const mailList = () => {
+    return (
+      <div>
+        <GetMail />
+      </div>
+    );
+  };
+
   return (
-    <div>
-      {isLoading ? `Accès non autorisé !` : <h1>Hello !</h1>}
-      {console.log(isLoading)}
-    </div>
+    <div>{isLoading ? `Vous n'avez pas accès à cette page !` : mailList()}</div>
   );
 }
 

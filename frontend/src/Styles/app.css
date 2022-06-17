@@ -2,7 +2,7 @@
 
 :root {
   --color-blue: #063aa9;
-  --color-lightblue:#9ca4b5;
+  --color-lightblue: #9ca4b5;
   --color-purewhite: #ffffff;
   --color-black: #050505;
   --color-white: #fdfdfd;
@@ -19,6 +19,7 @@
 
 button,
 input[type="submit"],
+input[type="button"]
 input[type="reset"] {
   background: none;
   color: inherit;
@@ -87,7 +88,7 @@ ul {
 
 .left-part p,
 .right-part p {
-  padding: 0.3rem 0 0.3rem 0;
+  padding: 0.8rem 0 0.3rem 0;
   font-size: 0.9rem;
   font-weight: 400;
 }
@@ -98,6 +99,7 @@ ul {
 
 .left-part h1,
 .right-part h1 {
+  text-align: center;
   padding-top: 1.4rem;
   font-size: 3rem;
   font-weight: 800;
@@ -181,7 +183,9 @@ ul {
   border-color: var(--color-black);
 }
 
-.login {
+.login,
+.refresh,
+.btn-linkedin {
   color: var(--color-white);
   font-size: 1.2rem;
   margin-top: 4rem;
@@ -191,6 +195,7 @@ ul {
   transition: 0.7s;
 }
 
+.refresh:hover,
 .login:hover {
   background-color: #6e6e6e;
 }
@@ -207,4 +212,53 @@ ul {
 
 .signin:hover {
   background-color: var(--color-lightblue);
+}
+.title-about-section,
+.title-members-section {
+  border-radius: 25px 25px 0 0;
+  padding: 2rem;
+  background-color: var(--color-blue);
+}
+.title-about-section h1,
+.title-members-section h1 {
+  text-align: center;
+  color: var(--color-purewhite);
+}
+.about-content,
+.members-content {
+  text-align: center;
+  background-color: var(--color-lightgrey);
+  min-height: 40rem;
+  height: auto;
+  padding: 4rem;
+  min-width: 20rem;
+  width: 40rem;
+  border-radius: 0 0 25px 25px;
+  box-shadow: 0px 8px 15px 0px #00000057;
+}
+.about-content p,
+.members-content p {
+  padding: 0.4rem;
+}
+
+.about-content h2 {
+  margin-top: -3rem;
+  margin-bottom: 1rem;
+}
+
+.refresh {
+  margin-top: 17rem;
+}
+
+.about-content
+.links {
+  margin-top: 1.5rem;
+  background-color: var(--color-blue);
+}
+
+.about-content
+.links:hover {
+  margin-top: 1.5rem;
+  background-color: var(--color-lightblue);
+  color: var(--color-black);
 }

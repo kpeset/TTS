@@ -20,7 +20,9 @@ router.post("/register", async (req, res) => {
 
   const emailExist = await User.findOne({ email: req.body.email });
   if (emailExist)
-    return res.status(400).send("Votre email appartient déjà à un compte.");
+    return res
+      .status(422)
+      .send("Votre email est déjà liée à un compte existant.");
 
   // Il est important de hasher le password de l'utilisateur. Je vais utiliser la bibliothèque Argon2 car recommandé par l'OWASP.
 
@@ -57,11 +59,12 @@ router.post("/login", async (req, res) => {
   const user = await User.findOne({ email: req.body.email });
   if (!user)
     // Si l'email n'existe pas, alors j'envoie ce message.
-    // Volontairement, j'inclus une erreur de MDP pour ne pas dire à un potentiel pirate que l'email existe dans la DB.
-    return res.status(400).send("Email invalide");
+    return res
+    .status(422)
+    .send("Ce compte n'existe pas.");
   // Maintenant je vérifie le MDP avec la fonctionnalité verify de argon2
   const validPass = await argon2.verify(user.password, req.body.password);
-  if (!validPass) return res.status(400).send("Password invalide");
+  if (!validPass) return res.status(400).send("Email ou password invalide.");
 
   //Créer et assigner un token
   const token = jwt.sign({ id: user.id }, process.env.TOKEN_SECRET);
