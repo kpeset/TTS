@@ -19,8 +19,7 @@
 
 button,
 input[type="submit"],
-input[type="button"]
-input[type="reset"] {
+input[type="button"] input[type="reset"] {
   background: none;
   color: inherit;
   border: none;
@@ -213,6 +212,11 @@ ul {
 .signin:hover {
   background-color: var(--color-lightblue);
 }
+
+/*********************/
+/**ABOUT & MEMBERS****/
+/*********************/
+
 .title-about-section,
 .title-members-section {
   border-radius: 25px 25px 0 0;
@@ -224,6 +228,7 @@ ul {
   text-align: center;
   color: var(--color-purewhite);
 }
+
 .about-content,
 .members-content {
   text-align: center;
@@ -250,14 +255,12 @@ ul {
   margin-top: 17rem;
 }
 
-.about-content
-.links {
+.about-content .links {
   margin-top: 1.5rem;
   background-color: var(--color-blue);
 }
 
-.about-content
-.links:hover {
+.about-content .links:hover {
   margin-top: 1.5rem;
   background-color: var(--color-lightblue);
   color: var(--color-black);

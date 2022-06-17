@@ -18,8 +18,6 @@ function Success() {
       });
   }, []);
 
-
-
   const mailList = () => {
     return (
       <div>

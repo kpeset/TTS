@@ -1,7 +1,3 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import GetMail from "../Components/GetMail";
-
 function About() {
   return (
     <div className="about-page">
