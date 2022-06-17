@@ -7,7 +7,7 @@ function Success() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:4000/api/success", {
+      .get("https://testtechserv.herokuapp.com/api/success", {
         withCredentials: true,
       })
       .then(function () {

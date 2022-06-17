@@ -15,12 +15,13 @@ function Home() {
   });
 
   const handleSubmitRegister = (e) => {
+    e.preventDefault()
     //Ici je sauvegarde les states de mon formulaire d'inscription
     if (registerValue.password !== registerValue.checkPassword) {
       alert("Les mots de passe ne sont pas identiques");
     } else {
       axios
-        .post("http://localhost:4000/api/user/register/", {
+        .post("https://testtechserv.herokuapp.com/api/user/register/", {
           email: registerValue.email,
           password: registerValue.password,
         })
@@ -53,7 +54,7 @@ function Home() {
     e.preventDefault();
     axios
       .post(
-        "http://localhost:4000/api/user/login/",
+        " https://testtechserv.herokuapp.com/api/user/login/",
         {
           email: loginValue.email,
           password: loginValue.password,

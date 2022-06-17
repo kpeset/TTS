@@ -1,4 +1,22 @@
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+
+
+
+
+
 function About() {
+
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("https://testtechserv.herokuapp.com/api/users/")
+      .then((res) => {
+        setUsers(res.data);
+      });
+  }, []);
+  
   return (
     <div className="about-page">
       <div className="title-about-section">
@@ -7,7 +25,7 @@ function About() {
       <div className="about-content">
         <h2>Bonjour !</h2>
         <p>
-          Je m'appelle Kevin, j'ai 34 ans, et je suis actuellement en
+          Je m'aaaappelle Kevin, j'ai 34 ans, et je suis actuellement en
           reconversion professionnelle à la Wild Code School.
         </p>
 
