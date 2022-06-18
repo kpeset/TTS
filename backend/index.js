@@ -5,7 +5,6 @@ const cookieParser = require("cookie-parser");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const authRoute = require("./routes/auth");
-const postRoute = require("./routes/posts");
 const successRoute = require("./routes/success");
 const getUsersRoute = require("./routes/getUsers");
 
@@ -29,8 +28,7 @@ app.use(
 app.use(cookieParser());
 
 // ROUTE DE MON MIDDLEWARE
-app.use("/api/user", authRoute);
-app.use("/api/posts", postRoute);
+app.use("/api", authRoute);
 app.use("/api/success", successRoute);
 app.use("/api/users", getUsersRoute);
 

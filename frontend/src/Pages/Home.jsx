@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import "../Styles/app.css";
 
@@ -21,7 +21,7 @@ function Home() {
       alert("Les mots de passe ne sont pas identiques");
     } else {
       axios
-        .post("http://localhost:8080/api/user/register/", {
+        .post("http://localhost:8080/api/register/", {
           email: registerValue.email,
           password: registerValue.password,
         })
@@ -58,7 +58,7 @@ function Home() {
     e.preventDefault();
     axios
       .post(
-        "http://localhost:8080/api/user/login/",
+        "http://localhost:8080/api/login/",
         {
           email: loginValue.email,
           password: loginValue.password,
