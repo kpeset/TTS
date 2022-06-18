@@ -151,7 +151,7 @@ function Home() {
                 onChange={handleChangeRegister}
               />
             </label>
-            <p>Veuillez saisir à nouveau votre mot de passe</p>
+            <p>Vérifiez votre mot de passe</p>
             <label>
               <input
                 type="password"

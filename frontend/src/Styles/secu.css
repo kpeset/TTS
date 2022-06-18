@@ -33,6 +33,7 @@ input[type="button"] input[type="reset"] {
 .content {
   display: flex;
   justify-content: center;
+  margin-top: 5rem;
 }
 
 /************/
@@ -69,7 +70,6 @@ ul {
 
 .main-form {
   display: flex;
-  flex-direction: column;
 }
 
 .left-part,
@@ -78,8 +78,9 @@ ul {
   justify-content: flex-start;
   flex-direction: column;
   align-items: center;
-  width: 100vw;
-  min-height: 70vh;
+  min-width: 20rem;
+  width: 25rem;
+  min-height: 42rem;
   height: auto;
   box-shadow: 0px 8px 15px 0px #00000057;
 }
@@ -87,7 +88,7 @@ ul {
 .left-part p,
 .right-part p {
   padding: 0.8rem 0 0.3rem 0;
-  font-size: 1.3rem;
+  font-size: 0.9rem;
   font-weight: 400;
 }
 
@@ -98,26 +99,27 @@ ul {
 .left-part h1,
 .right-part h1 {
   text-align: center;
-  padding-top: 4rem;
-  font-size: 2rem;
+  padding-top: 1.4rem;
+  font-size: 3rem;
   font-weight: 800;
 }
 
 .left-part {
   background-color: var(--color-lightgrey);
+  border-radius: 25px 0 0 25px;
 }
 
 .left-part h1 {
   color: var(--color-blue);
 }
 
-.left-part h2,
-.right-part h2 {
-  font-size: 1.7rem;
+.left-part h2 {
+  font-size: 1.5rem;
 }
 
 .right-part {
   background-color: var(--color-grey);
+  border-radius: 0 25px 25px 0;
 }
 
 .right-part h1,
@@ -129,19 +131,20 @@ ul {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  justify-content: space-around;
+  justify-content: flex-end;
   align-items: center;
-  padding: 2rem 0 2rem 0;
+  padding: 6rem 0 3rem 0;
 }
 
 .line {
   height: 0.1rem;
-  width: 4rem;
+  width: 15rem;
   background-color: var(--color-blue);
+  margin: 0 1rem 0 1rem;
 }
 
 .right-part .line {
-  width: 4rem;
+  width: 16.15rem;
   background-color: var(--color-purewhite);
 }
 
@@ -150,7 +153,7 @@ ul {
 .left-part input[type="email"],
 .left-part input[type="password"] {
   width: 20rem;
-  height: 3rem;
+  height: 2rem;
   padding: 0.313rem;
   outline: none;
   transition: 0.7s;
@@ -199,7 +202,7 @@ ul {
 .signin {
   color: var(--color-black);
   font-size: 1.2rem;
-  margin: 4rem 0 5rem 0;
+  margin-top: 4rem;
   background-color: var(--color-purewhite);
   border-radius: 25px;
   padding: 1rem;
@@ -214,11 +217,13 @@ ul {
 /**ABOUT & MEMBERS****/
 /*********************/
 
+.title-about-section,
 .title-members-section {
+  border-radius: 25px 25px 0 0;
   padding: 2rem;
-  background-color: var(--color-grey);
+  background-color: var(--color-blue);
 }
-
+.title-about-section h1,
 .title-members-section h1 {
   text-align: center;
   color: var(--color-purewhite);
@@ -226,38 +231,33 @@ ul {
 
 .about-content,
 .members-content {
-  margin-top: -2rem;
   text-align: center;
   background-color: var(--color-lightgrey);
   min-height: 40rem;
   height: auto;
-  padding: 2rem 0 0.8 0;
-  width: 100vw;
+  padding: 4rem;
+  min-width: 20rem;
+  width: 40rem;
   border-radius: 0 0 25px 25px;
   box-shadow: 0px 8px 15px 0px #00000057;
-}
-
-.members-content {
-  margin-top: 0rem;
 }
 .about-content p,
 .members-content p {
   padding: 0.4rem;
-  font-size: 1.2rem;
 }
 
 .about-content h2 {
-  padding-top: 2rem;
-  margin: 2rem 0 2rem 0;
+  margin-top: -3rem;
+  margin-bottom: 1rem;
+}
+
+.refresh {
+  margin-top: 17rem;
 }
 
 .about-content .links {
   margin-top: 1.5rem;
   background-color: var(--color-blue);
-}
-
-.links {
-  margin-bottom: 3rem;
 }
 
 .about-content .links:hover {

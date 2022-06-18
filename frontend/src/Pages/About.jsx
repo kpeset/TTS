@@ -1,9 +1,6 @@
 function About() {
   return (
     <div className="about-page">
-      <div className="title-about-section">
-        <h1>Qui suis-je ?</h1>
-      </div>
       <div className="about-content">
         <h2>Bonjour !</h2>
         <p>
