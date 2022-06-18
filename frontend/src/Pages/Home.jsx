@@ -15,18 +15,20 @@ function Home() {
   });
 
   const handleSubmitRegister = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     //Ici je sauvegarde les states de mon formulaire d'inscription
     if (registerValue.password !== registerValue.checkPassword) {
       alert("Les mots de passe ne sont pas identiques");
     } else {
       axios
-        .post("https://testtechserv.herokuapp.com/api/user/register/", {
+        .post("http://localhost:8080/api/user/register/", {
           email: registerValue.email,
           password: registerValue.password,
         })
         .then(function (response) {
           console.log(response);
+          alert("Votre compte a été crée avec succès.");
+          window.location = "/";
         })
         .catch(function (error) {
           const mailAlreadyExist = error.response.data;
@@ -35,8 +37,10 @@ function Home() {
             "Votre email est déjà liée à un compte existant."
           ) {
             alert(mailAlreadyExist);
+            window.location = "/";
           } else {
             alert("Votre mot de passe doit contenir au moins 6 caractères.");
+            window.location = "/";
           }
         });
     }
@@ -54,7 +58,7 @@ function Home() {
     e.preventDefault();
     axios
       .post(
-        " https://testtechserv.herokuapp.com/api/user/login/",
+        "http://localhost:8080/api/user/login/",
         {
           email: loginValue.email,
           password: loginValue.password,

@@ -6,8 +6,8 @@ const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const authRoute = require("./routes/auth");
 const postRoute = require("./routes/posts");
-const successRoute = require("./routes/success")
-const getUsersRoute = require("./routes/getUsers")
+const successRoute = require("./routes/success");
+const getUsersRoute = require("./routes/getUsers");
 
 dotenv.config();
 
@@ -34,4 +34,4 @@ app.use("/api/posts", postRoute);
 app.use("/api/success", successRoute);
 app.use("/api/users", getUsersRoute);
 
-app.listen(4000, () => console.log("Le backend fonctionne parfaitement !"));
+app.listen(8080, () => console.log("Le backend fonctionne parfaitement !"));

@@ -6,7 +6,7 @@ function GetMail({ data }) {
 
   useEffect(() => {
     axios
-      .get("http://localhost:4000/api/users/", {
+      .get("http://localhost:8080/api/users/", {
         withCredentials: true,
       })
       .then((res) => {

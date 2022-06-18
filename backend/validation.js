@@ -6,23 +6,22 @@ const Joi = require("joi");
 // Exemple : modification d'un profil... Mais aussi pour se logger
 
 const registerValidation = (data) => {
-const schema = Joi.object({
-  email: Joi.string().email().min(6).max(255).required(),
-  password: Joi.string().min(6).max(1024).required(),
-});
+  const schema = Joi.object({
+    email: Joi.string().email().min(6).max(255).required(),
+    password: Joi.string().min(6).max(1024).required(),
+  });
   //VALIDATION DES DONNEES AVANT DE CREER L'UTILISATEUR
-return schema.validate(data)
+  return schema.validate(data);
 };
 
 const loginValidation = (data) => {
-    const schema = Joi.object({
-      email: Joi.string().email().min(6).max(255).required(),
-      password: Joi.string().min(6).max(1024).required(),
-    });
-      //VALIDATION DES DONNEES AVANT DE CREER L'UTILISATEUR
-    return schema.validate(data)
-    };
-    
+  const schema = Joi.object({
+    email: Joi.string().email().min(6).max(255).required(),
+    password: Joi.string().min(6).max(1024).required(),
+  });
+  //VALIDATION DES DONNEES AVANT DE CREER L'UTILISATEUR
+  return schema.validate(data);
+};
 
 module.exports.registerValidation = registerValidation;
 module.exports.loginValidation = loginValidation;

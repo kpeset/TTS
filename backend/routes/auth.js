@@ -59,9 +59,7 @@ router.post("/login", async (req, res) => {
   const user = await User.findOne({ email: req.body.email });
   if (!user)
     // Si l'email n'existe pas, alors j'envoie ce message.
-    return res
-    .status(422)
-    .send("Ce compte n'existe pas.");
+    return res.status(422).send("Ce compte n'existe pas.");
   // Maintenant je vérifie le MDP avec la fonctionnalité verify de argon2
   const validPass = await argon2.verify(user.password, req.body.password);
   if (!validPass) return res.status(400).send("Email ou password invalide.");
@@ -70,7 +68,12 @@ router.post("/login", async (req, res) => {
   const token = jwt.sign({ id: user.id }, process.env.TOKEN_SECRET);
   res
     // .header("auth-token", token)
-    .cookie("authcookie", token, { maxAge: 900000, httpOnly: true })
+    .cookie("authcookie", token, {
+      maxAge: 900000,
+      httpOnly: true,
+      sameSite: "none",
+      secure: true,
+    })
     .send(`Mon token : ${token}`);
 });
 
